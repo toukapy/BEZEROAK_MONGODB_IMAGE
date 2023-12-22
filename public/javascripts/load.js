@@ -61,6 +61,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
+                <td><a src=${user.image}>image</a></td>
                 <td><a onclick="deleteUser('${user.id}')">[x]</a> <a onclick="editUser('${user.id}')">[e]</a>  </td>
             `;
 };
@@ -89,7 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
         izena: e.target.izena.value,
         abizena: e.target.abizena.value,
         id: Date.now(),
-        email: e.target.email.value
+        email: e.target.email.value,
+        image: e.target.avatar.value
     }
 
     insertUser(user);
@@ -97,7 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/users/new", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+          'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+          'Content-Type': 'multipart/form-data'
       },
       body: JSON.stringify(user),
     })
