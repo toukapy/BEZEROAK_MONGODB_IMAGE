@@ -124,11 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
-
-      // Sample JSON array of users
-
-    fetch("/users/list")
+  });
+  fetch("/users/list")
     .then((r) => r.json())
     .then((users) => {
       console.log(users);
@@ -137,8 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
       users.forEach((user) => {
         insertUser(user);
       });
-    });
+
+  });
 
 
-});
+
 });
