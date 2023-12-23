@@ -61,7 +61,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td><a src=${user.image}>image</a></td>
+                <td>${user.avatar}</td>
                 <td><a onclick="deleteUser('${user.id}')">[x]</a> <a onclick="editUser('${user.id}')">[e]</a>  </td>
             `;
 };
