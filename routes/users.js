@@ -74,10 +74,8 @@ router.post("/new", upload.single('avatar'), (req, res) => {
   users.push(userNew);
   db.bezeroak.insert(userNew, function (err, user){
     if (err){
-      debug(err)
       res.status(500).json("");
     }else{
-      debug("Create "+JSON.stringfy(user));
       res.json(user);
     }
   });
