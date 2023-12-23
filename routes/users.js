@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   },
   filename: function(req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix +".png")
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
   }
 })
 
@@ -28,9 +28,18 @@ const uploadFilter = function(req, file, cb) {
   }
 }
 
-const upload = multer({
-  storage: storage,
-  fileFilter: uploadFilter,
+const upload = multer({ storage: storage,
+  limits: {
+    fileSize: 2e+6,
+  },
+  fileFilter: function (req, file, cb) {
+    let ext = path.extname(file.originalname);
+    if (ext !== '.png' && ext !== '.jpg') {
+      req.fileValidationError = "Forbidden extension";
+      return cb(null, false, req.fileValidationError);
+    }
+    cb(null, true);
+  }
 })
 
 var users = [];
@@ -65,10 +74,10 @@ router.post("/new", upload.single('avatar'), (req, res) => {
   }
 
   if(req.file){
-    userNew['avatar'] = req.file.filename;
+    userNew['avatar'] = req.file.path;
 
   }else{
-    userNew['avatar'] = 'no-image.png';
+    userNew['avatar'] = 'uploads/no-image.png';
   }
 
 
@@ -105,7 +114,7 @@ router.put("/update/:id", upload.single('avatar'), (req, res) => {
   user.abizena = req.body.abizena;
   user.email = req.body.email;
   if(req.file){
-    user['avatar'] = req.file.filename
+    user['avatar'] = req.file.path
   }
   db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
       {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user.avatar}},
