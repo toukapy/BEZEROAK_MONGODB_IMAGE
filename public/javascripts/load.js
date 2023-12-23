@@ -88,9 +88,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const avatarInput = document.getElementById("avatar");
 
-    const izena = "John";
-    const abizena = "Doe";
-    const email = "john.doe@example.com";
+
+    const izena = e.target.izena.value;
+    const abizena = e.target.abizena.value;
+    const email = e.target.email.value;
+
+    let user = {
+        izena: izena,
+        abizena: abizena,
+        email: email,
+        avatar: avatarInput.files[0]
+    }
 
     const formData = new FormData();
     formData.append("avatar", avatarInput.files[0]);
