@@ -10,7 +10,7 @@ const db = mongojs("mongodb://127.0.0.1:27017/bezeroakdb", ['bezeroak']);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, path.join(__dirname, 'uploads/'))
+    cb(null, path.join(__dirname, '/../../uploads'))
   },
   filename: function(req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
