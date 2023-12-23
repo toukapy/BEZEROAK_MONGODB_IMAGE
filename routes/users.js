@@ -77,7 +77,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
     userNew['avatar'] = req.file.filename;
 
   }else{
-    userNew['avatar'] = 'uploads/no-image.png';
+    userNew['avatar'] = 'no-image.png';
   }
 
 
@@ -116,12 +116,13 @@ router.put("/update/:id", upload.single('avatar'), (req, res) => {
   console.log("File: ", req.file.filename);
 
   if(req.file){
-    console.log("Here")
     user['avatar'] = req.file.filename;
-  }
 
+  }else{
+    user['avatar'] = 'no-image.png';
+  }
   db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
-      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: req.file.filaename}},
+      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user.avatar}},
       function(err, user){
         if(err){
           console.log(err)
