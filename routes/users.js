@@ -99,13 +99,13 @@ router.delete("/delete/:id", (req, res) => {
 
 });
 
-router.put("/update/:id", (req, res) => {
+router.put("/update/:id",upload.single('avatar'), (req, res) => {
   let user = users.find(user => user._id === req.params.id);
   user.izena = req.body.izena;
   user.abizena = req.body.abizena;
   user.email = req.body.email;
   if(req.file){
-    user['avatar'] = req.file.path
+    user['avatar'] = req.file.filename
   }
   db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
       {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user.avatar}},

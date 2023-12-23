@@ -29,7 +29,7 @@ let updateUser = (id) => {
     .then(data => {
         console.log(data);
         let img = document.getElementById("avat");
-        img.src = data.avatar;
+        img.src = `https://test.toukapy-ws.live/uploads/${data.avatar}`;
         img.removeAttribute("id");
     })
     .catch((error) => {
