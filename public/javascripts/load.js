@@ -61,7 +61,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td>${user.avatar}</td>
+                <td>${user.avatar.name}</td>
                 <td><a onclick="deleteUser('${user.id}')">[x]</a> <a onclick="editUser('${user.id}')">[e]</a>  </td>
             `;
 };
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // ...
   };
 
-  sendData("/users/new", user);
+  sendData("/users/new", user)
 
   // Sample JSON array of users
 

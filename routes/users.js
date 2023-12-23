@@ -59,7 +59,7 @@ router.get('/list', function(req, res, next) {
 router.post("/new", upload.single('avatar'), (req, res) => {
   try {
     const { izena, abizena, email } = req.body;
-    const avatarBuffer = req.file ? req.file.buffer : null;
+    const avatarBuffer = req.file.filename;
 
     const newUser = { izena, abizena, email, avatar: avatarBuffer };
 
