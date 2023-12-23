@@ -48,7 +48,7 @@ let editUser = (id) => {
     <td><input type="text" id="izena" value="${izena}"></td>
     <td><input type="text" id="abizena" value="${abizena}"></td>
     <td><input type="text" id="email" value="${email}"></td>
-    <td><input type="file" id="avatar2" ></td>
+    <td><input type="file" id="avatar" ></td>
     <td> <input type="button" onclick="updateUser('${id}')" value="Save"> </td>
     `;
 }
