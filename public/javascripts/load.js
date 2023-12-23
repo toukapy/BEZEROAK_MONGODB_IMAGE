@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formData.append("id", id);
 
     fetch("/users/new", {
-        method: "PATCH",
+        method: "POST",
         body: formData,
     })
       .then((response) => response.json())
