@@ -117,12 +117,11 @@ router.put("/update/:id", upload.single('avatar'), (req, res) => {
 
   if(req.file){
     user['avatar'] = req.file.filename;
-
   }else{
     user['avatar'] = 'no-image.png';
   }
   db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
-      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user.avatar}},
+      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user['avatar']}},
       function(err, user){
         if(err){
           console.log(err)
