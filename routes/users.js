@@ -60,7 +60,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
   let userNew = {
     izena: req.body.izena,
     abizena: req.body.abizena,
-    //_id: Date.now(),
+    _id: Date.now(),
     email: req.body.email
   }
 
