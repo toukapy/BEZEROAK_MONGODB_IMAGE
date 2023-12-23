@@ -3,31 +3,34 @@ let updateUser = (id) => {
     let izena = row.children[1].children[0].value;
     let abizena = row.children[2].children[0].value;
     let email = row.children[3].children[0].value;
+
+    let formData = new FormData();
+
+    formData.append("izena", izena);
+    formData.append("abizena", abizena);
+    formData.append("_id", id);
+    formData.append("email", email);
+    formData.append("avatar", row.children[1].children[0].files[0]);
+
     row.innerHTML = `
     <th scope="row">${id}</th>
     <td>${izena}</td>
     <td>${abizena}</td>
     <td>${email}</td>
+    <td><img id="avat" class="rounded-circle" src="" width="50" height="50"/></td>
     <td> <a onclick="deleteUser('${id}')">[x]</a> <a onclick="editUser('${id}')">[e]</a>  </td>
     `;
 
-    let user = {
-        izena: izena,
-        abizena: abizena,
-        id: id,
-        email: email
-    }
-
     fetch(`/users/update/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);  // handle the response data or action
+        console.log(data);
+        let img = document.getElementById("avat");
+        img.src = `https://test.toukapy-ws.live/uploads/${data.avatar}`;
+        img.removeAttribute("id");
     })
     .catch((error) => {
         console.error('Error:', error);

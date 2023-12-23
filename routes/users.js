@@ -104,8 +104,11 @@ router.put("/update/:id", (req, res) => {
   user.izena = req.body.izena;
   user.abizena = req.body.abizena;
   user.email = req.body.email;
+  if(req.file){
+    user['avatar'] = req.file.filename
+  }
   db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
-      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email}},
+      {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email, avatar: user.avatar}},
       function(err, user){
         if(err){
           console.log(err)
