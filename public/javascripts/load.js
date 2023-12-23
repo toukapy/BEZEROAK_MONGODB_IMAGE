@@ -28,13 +28,14 @@ let updateUser = (id) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        console.log(data.avatar);
         let img = document.getElementById("avat");
         img.src = `https://test.toukapy-ws.live/uploads/${data.avatar}`;
         img.removeAttribute("id");
     })
     .catch((error) => {
         console.error('Error:', error);
-        console.log(`https://test.toukapy-ws.live/uploads/${data.avatar}`)
+
     });
 }
 
