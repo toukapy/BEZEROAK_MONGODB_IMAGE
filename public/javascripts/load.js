@@ -28,7 +28,7 @@ let updateUser = (id) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        console.log(data.avatar);
+        console.log("Avatar: ", data.avatar);
         let img = document.getElementById("avat");
         img.src = `https://test.toukapy-ws.live/uploads/${data.avatar}`;
         img.removeAttribute("id");
