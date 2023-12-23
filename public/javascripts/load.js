@@ -120,22 +120,24 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
-  });
+
+    });
+
 
 
       // Sample JSON array of users
 
-      fetch("/users/list")
-        .then((r) => r.json())
-        .then((users) => {
-          console.log(users);
-          // Select the table body where new rows will be appended
+    fetch("/users/list")
+    .then((r) => r.json())
+    .then((users) => {
+      console.log(users);
+      // Select the table body where new rows will be appended
 
-          users.forEach((user) => {
-            insertUser(user);
-          });
-        });
+      users.forEach((user) => {
+        insertUser(user);
+      });
+    });
 
 
+});
 });
