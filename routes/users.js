@@ -63,7 +63,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 
     const newUser = { izena, abizena, email, avatar: avatarBuffer };
 
-    db.bezeroak.insert(newUser, function (err, user) {
+    db.bezeroak2.insert(newUser, function (err, user) {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
