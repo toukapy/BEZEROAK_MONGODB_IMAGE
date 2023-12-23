@@ -9,15 +9,15 @@ const mongojs = require('mongojs');
 const db = mongojs("mongodb://127.0.0.1:27017/bezeroakdb", ['bezeroak']);
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the upload directory
+  destination: function (req, file, cb){
+    cb(null, 'uploads/')
   },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const extension = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + extension);
-  },
-});
+  filename: function(req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix +".png")
+  }
+})
+
 const uploadFilter = function(req, file, cb) {
   var typeArray = file.mimetype.split('/');
   var fileType = typeArray[1];
@@ -62,7 +62,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 
   const newUser = { izena, abizena, email, avatarPath };
 
-  users.push(newUser);
+  users.push(user);
 
   db.bezeroak.insert(newUser, function (err, user) {
     if (err) {
