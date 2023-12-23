@@ -1,8 +1,8 @@
 let updateUser = (id) => {
     let row = document.getElementById(id);
-    let izena = row.children[1].children[0].value;
-    let abizena = row.children[2].children[0].value;
-    let email = row.children[3].children[0].value;
+    let izena = row.children[2].children[0].value;
+    let abizena = row.children[3].children[0].value;
+    let email = row.children[4].children[0].value;
 
     let formData = new FormData();
 
@@ -10,14 +10,15 @@ let updateUser = (id) => {
     formData.append("abizena", abizena);
     formData.append("_id", id);
     formData.append("email", email);
-    formData.append("avatar", row.children[4].children[0].files[0]);
+    formData.append("avatar", row.children[1].children[0].files[0]);
 
     row.innerHTML = `
+
     <th scope="row">${id}</th>
+    <td><img id="avat" src="" width="50" height="50"/></td>
     <td>${izena}</td>
     <td>${abizena}</td>
     <td>${email}</td>
-    <td><img id="avat" src="" width="50" height="50"/></td>
     <td> <a onclick="deleteUser('${id}')">[x]</a> <a onclick="editUser('${id}')">[e]</a>  </td>
     `;
 
@@ -46,10 +47,11 @@ let editUser = (id) => {
     let email = row.children[3].innerHTML;
     row.innerHTML = `
     <th scope="row">${id}</th>
+    <td><input type="file" id="avatar" ></td>
     <td><input type="text" id="izena" value="${izena}"></td>
     <td><input type="text" id="abizena" value="${abizena}"></td>
     <td><input type="text" id="email" value="${email}"></td>
-    <td><input type="file" id="avatar" ></td>
+    
     <td> <input type="button" onclick="updateUser('${id}')" value="Save"> </td>
     `;
 }
@@ -64,10 +66,11 @@ let insertUser = (user) => {
   newRow.setAttribute("id", user._id);
   newRow.innerHTML = `
                 <th scope="row">${user._id}</th>
+                <td><img src="${user.avatar}" width="50" height="50"></td>
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td><img src="${user.avatar}" width="50" height="50"></td>
+                
                 <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
