@@ -61,7 +61,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td><a src="https://test.toukapy-ws.live/uploads/${user.avatar}">Image</a></td>
+                <td><a href="https://test.toukapy-ws.live/uploads/${user.avatar}">Image</a></td>
                 <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
