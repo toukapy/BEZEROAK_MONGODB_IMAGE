@@ -17,7 +17,7 @@ let updateUser = (id) => {
     <td>${izena}</td>
     <td>${abizena}</td>
     <td>${email}</td>
-    <td><img id="avat" class="rounded-circle" src="" width="50" height="50"/></td>
+    <td><img id="avat" src="" width="50" height="50"/></td>
     <td> <a onclick="deleteUser('${id}')">[x]</a> <a onclick="editUser('${id}')">[e]</a>  </td>
     `;
 
@@ -29,7 +29,7 @@ let updateUser = (id) => {
     .then(data => {
         console.log(data);
         let img = document.getElementById("avat");
-        img.src = `https://test.toukapy-ws.live/uploads/${data.avatar}`;
+        img.src = data.avatar;
         img.removeAttribute("id");
     })
     .catch((error) => {
