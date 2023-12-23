@@ -34,6 +34,7 @@ let updateUser = (id) => {
     })
     .catch((error) => {
         console.error('Error:', error);
+        console.log(`https://test.toukapy-ws.live/uploads/${data.avatar}`)
     });
 }
 
