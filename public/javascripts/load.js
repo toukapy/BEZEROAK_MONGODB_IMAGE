@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         avatar: avatarInput.files[0]
     }
 
-
+    insertUser(data);
 
 //    fetch("/users/new", {
 //        method: "POST",
@@ -115,44 +115,44 @@ document.addEventListener("DOMContentLoaded", function () {
 //        console.error("Error:", error);
 //      });
 //  });
+//
+    async function sendData(url, data) {
+          const formData  = new FormData();
 
-  async function sendData(url, data) {
-      const formData  = new FormData();
+          for(const name in data) {
+              formData.append(name, data[name]);
+          }
 
-      for(const name in data) {
-          formData.append(name, data[name]);
-      }
+          const response = await fetch(url, {
+              method: 'POST',
+              body: formData
+          })
+              .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
 
-      const response = await fetch(url, {
-          method: 'POST',
-          body: formData
-      })
-          .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        insertUser(data);
-      })
-     .catch((error) => {
-        console.error("Error:", error);
-      });
+          })
+         .catch((error) => {
+            console.error("Error:", error);
+          });
 
-      // ...
-  };
+          // ...
+      };
 
-  sendData("/users/new", user)
+      sendData("/users/new", user)
 
-  // Sample JSON array of users
+      // Sample JSON array of users
 
-  fetch("/users/list")
-    .then((r) => r.json())
-    .then((users) => {
-      console.log(users);
-      // Select the table body where new rows will be appended
+      fetch("/users/list")
+        .then((r) => r.json())
+        .then((users) => {
+          console.log(users);
+          // Select the table body where new rows will be appended
 
-      users.forEach((user) => {
-        insertUser(user);
-      });
-    });
+          users.forEach((user) => {
+            insertUser(user);
+          });
+        });
 });
 
 });
