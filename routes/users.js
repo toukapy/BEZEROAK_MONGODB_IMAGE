@@ -84,8 +84,8 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-  users = users.filter(user => user._id !== req.params.id);
-  db.bezeroak.remove({_id: mongojs.ObjectId(req.params.id)}, function (err, user){
+  users = users.filter(user => user._id !== req.params._id);
+  db.bezeroak.remove({_id: mongojs.ObjectId(req.params._id)}, function (err, user){
     if(err){
       console.log(err)
 
