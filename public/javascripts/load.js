@@ -100,26 +100,44 @@ document.addEventListener("DOMContentLoaded", function () {
         avatar: avatarInput.files[0]
     }
 
-    const formData = new FormData();
-    formData.append("avatar", avatarInput.files[0]);
-    formData.append("izena", izena);
-    formData.append("abizena", abizena);
-    formData.append("email", email);
-
     insertUser(user);
 
-    fetch("/users/new", {
-        method: "POST",
-        body: formData,
-    })
-      .then((response) => response.json())
+//    fetch("/users/new", {
+//        method: "POST",
+//        body: formData,
+//    })
+//      .then((response) => response.json())
+//      .then((data) => {
+//        console.log(data); // handle the response data or action
+//      })
+//      .catch((error) => {
+//        console.error("Error:", error);
+//      });
+//  });
+
+  async function sendData(url, data) {
+      const formData  = new FormData();
+
+      for(const name in data) {
+          formData.append(name, data[name]);
+      }
+
+      const response = await fetch(url, {
+          method: 'POST',
+          body: formData
+      })
+          .then((response) => response.json())
       .then((data) => {
         console.log(data); // handle the response data or action
       })
-      .catch((error) => {
+     .catch((error) => {
         console.error("Error:", error);
       });
-  });
+
+      // ...
+  };
+
+  sendData("/users/new", user);
 
   // Sample JSON array of users
 
@@ -133,4 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
         insertUser(user);
       });
     });
+});
+
 });
