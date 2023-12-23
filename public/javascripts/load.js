@@ -42,9 +42,9 @@ let updateUser = (id) => {
 
 let editUser = (id) => {
     let row = document.getElementById(id);
-    let izena = row.children[1].innerHTML;
-    let abizena = row.children[2].innerHTML;
-    let email = row.children[3].innerHTML;
+    let izena = row.children[2].innerHTML;
+    let abizena = row.children[3].innerHTML;
+    let email = row.children[4].innerHTML;
     row.innerHTML = `
     <th scope="row">${id}</th>
     <td><input type="file" id="avatar" ></td>
@@ -70,7 +70,6 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                
                 <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
