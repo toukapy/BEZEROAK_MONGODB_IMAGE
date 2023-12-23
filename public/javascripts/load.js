@@ -61,7 +61,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td><a href="https://test.toukapy-ws.live/uploads/${user.avatar}">Image</a></td>
+                <td><img src="https://test.toukapy-ws.live/uploads/${user.avatar}" width="50" height="50"></td>
                 <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
@@ -86,21 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("formularioa").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const avatarInput = document.getElementById("avatar");
+    const form = document.getElementById("formularioa");
 
 
-    const izena = e.target.izena.value;
-    const abizena = e.target.abizena.value;
-    const email = e.target.email.value;
-
-
-
-
-    const formData = new FormData();
-    formData.append("avatar", avatarInput.files[0]);
-    formData.append("izena", izena);
-    formData.append("abizena", abizena);
-    formData.append("email", email);
+    const formData = new FormData(form);
 
     fetch("/users/new", {
         method: "POST",

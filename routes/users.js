@@ -33,7 +33,7 @@ const upload = multer({
   fileFilter: uploadFilter,
 })
 
-let users = [];
+var users = [];
 
 db.bezeroak.find(function(err, userdocs){
   if(err){
@@ -60,7 +60,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
   let userNew = {
     izena: req.body.izena,
     abizena: req.body.abizena,
-    id: Date.now(),
+    //_id: Date.now(),
     email: req.body.email
   }
 
