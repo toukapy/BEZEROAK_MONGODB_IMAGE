@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         avatar: avatarInput.files[0]
     }
 
-    insertUser(data);
+    insertUser(user);
 
 //    fetch("/users/new", {
 //        method: "POST",
