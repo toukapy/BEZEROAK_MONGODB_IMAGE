@@ -30,7 +30,7 @@ let updateUser = (id) => {
         console.log(data);
         console.log("Avatar: ", data.avatar);
         let img = document.getElementById("avat");
-        img.src = `http://test.toukapy-ws.live/uploads/${data.avatar}`;
+        img.src = `http://ariketa4.toukapy-ws.live/uploads/${data.avatar}`;
         img.removeAttribute("id");
     })
     .catch((error) => {
@@ -67,7 +67,7 @@ let insertUser = (user) => {
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
-                <td><img src="http://test.toukapy-ws.live/uploads/${user.avatar}" width="50" height="50"></td>
+                <td><img src="http://ariketa4.toukapy-ws.live/uploads/${user.avatar}" width="50" height="50"></td>
                 <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
