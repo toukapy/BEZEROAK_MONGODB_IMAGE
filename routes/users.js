@@ -58,7 +58,7 @@ router.get('/list', function(req, res, next) {
 
 router.post("/new", upload.single('avatar'), (req, res) => {
   const { izena, abizena, email } = req.body;
-  const avatarPath = req.file ? req.file.path : null;
+  const avatarPath = req.file ? `/uploads/${req.file.filename}` : null;
 
   const newUser = { izena, abizena, email, avatarPath };
 
