@@ -6,7 +6,7 @@ const path = require('path');
 
 
 const mongojs = require('mongojs');
-const db = mongojs("mongodb://127.0.0.1:27017/bezeroakdb", ['bezeroak2']);
+const db = mongojs("mongodb://127.0.0.1:27017/bezeroakdb", ['bezeroak']);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
@@ -35,7 +35,7 @@ const upload = multer({
 
 let users = [];
 
-db.bezeroak2.find(function(err, userdocs){
+db.bezeroak.find(function(err, userdocs){
   if(err){
     console.log(err)
   }else{
@@ -63,7 +63,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 
     const newUser = { izena, abizena, email, avatar: avatarBuffer };
 
-    db.bezeroak2.insert(newUser, function (err, user) {
+    db.bezeroak.insert(newUser, function (err, user) {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -80,7 +80,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 
 router.delete("/delete/:id", (req, res) => {
   users = users.filter(user => user._id !== req.params.id);
-  db.bezeroak2.remove({_id: mongojs.ObjectId(req.params.id)}, function (err, user){
+  db.bezeroak.remove({_id: mongojs.ObjectId(req.params.id)}, function (err, user){
     if(err){
       console.log(err)
 
@@ -98,7 +98,7 @@ router.put("/update/:id", (req, res) => {
   user.izena = req.body.izena;
   user.abizena = req.body.abizena;
   user.email = req.body.email;
-  db.bezeroak2.update({_id: mongojs.ObjectId(req.params.id)},
+  db.bezeroak.update({_id: mongojs.ObjectId(req.params.id)},
       {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email}},
       function(err, user){
         if(err){
