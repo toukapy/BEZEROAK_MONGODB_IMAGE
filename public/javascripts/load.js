@@ -55,14 +55,14 @@ let insertUser = (user) => {
 
   // Create a new row and set its innerHTML based on the user data
   var newRow = tableBody.insertRow();
-  newRow.setAttribute("id", user.id);
+  newRow.setAttribute("id", user._id);
   newRow.innerHTML = `
-                <th scope="row">${user.id}</th>
+                <th scope="row">${user._id}</th>
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
                 <td>${user.avatar.name}</td>
-                <td><a onclick="deleteUser('${user.id}')">[x]</a> <a onclick="editUser('${user.id}')">[e]</a>  </td>
+                <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
             `;
 };
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let user = {
         izena: izena,
         abizena: abizena,
-        id: Date.now(),
+        _id: Date.now(),
         email: email,
         avatar: avatarInput.files[0]
     }
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formData.append("izena", izena);
     formData.append("abizena", abizena);
     formData.append("email", email);
-    formData.append("id", user.id);
+    formData.append("id", user._id);
 
     fetch("/users/new", {
         method: "POST",
