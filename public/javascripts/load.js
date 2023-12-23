@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("formularioa").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const formData = new FormData(this);
+    const formData = new FormData(e.target);
 
 
     fetch("/users/new", {

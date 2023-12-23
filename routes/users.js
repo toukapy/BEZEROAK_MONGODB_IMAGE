@@ -78,7 +78,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
       res.status(500).json("");
     }else{
       debug("Create "+JSON.stringfy(user));
-      res.json(user)
+      res.json(user);
     }
   });
 
