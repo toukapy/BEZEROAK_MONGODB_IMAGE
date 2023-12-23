@@ -57,7 +57,7 @@ let insertUser = (user) => {
   var newRow = tableBody.insertRow();
   newRow.setAttribute("id", user.id);
   newRow.innerHTML = `
-                <th scope="row">${user._id}</th>
+                <th scope="row">${user.id}</th>
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
