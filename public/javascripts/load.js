@@ -96,11 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let user = {
         izena: izena,
         abizena: abizena,
+        _id: Date.now(),
         email: email,
         avatar: avatarInput.files[0]
     }
 
-    insertUser(user);
+
 
 //    fetch("/users/new", {
 //        method: "POST",
@@ -128,7 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
       })
           .then((response) => response.json())
       .then((data) => {
-        console.log(data); // handle the response data or action
+        console.log(data);
+        insertUser(data);
       })
      .catch((error) => {
         console.error("Error:", error);
