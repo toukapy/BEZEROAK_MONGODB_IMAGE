@@ -10,7 +10,7 @@ let updateUser = (id) => {
     formData.append("abizena", abizena);
     formData.append("_id", id);
     formData.append("email", email);
-    formData.append("avatar", row.children[4].children[0].files[0]);
+    formData.append("avatar", row.children[5].children[0].files[0]);
 
     row.innerHTML = `
     <th scope="row">${id}</th>
