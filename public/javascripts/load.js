@@ -96,19 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let user = {
         izena: izena,
         abizena: abizena,
-        _id: Date.now(),
+        id: Date.now(),
         email: email,
         avatar: avatarInput.files[0]
     }
 
-    insertUser(user);
+    //insertUser(user);
 
     const formData = new FormData();
     formData.append("avatar", avatarInput.files[0]);
     formData.append("izena", izena);
     formData.append("abizena", abizena);
     formData.append("email", email);
-    formData.append("id", user._id);
+    formData.append("id", user.id);
 
     fetch("/users/new", {
         method: "POST",
@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // handle the response data or action
+        insertUser(data);
       })
       .catch((error) => {
         console.error("Error:", error);

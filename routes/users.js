@@ -98,7 +98,7 @@ router.put("/update/:id", (req, res) => {
   user.izena = req.body.izena;
   user.abizena = req.body.abizena;
   user.email = req.body.email;
-  db.bezeroak.update({_id: mongojs.ObjectId(req.params.id)},
+  db.bezeroakcd.update({_id: mongojs.ObjectId(req.params.id)},
       {$set: {izena: req.body.izena, abizena:req.body.abizena, email:req.body.email}},
       function(err, user){
         if(err){
