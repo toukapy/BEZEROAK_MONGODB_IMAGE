@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formData.append("izena", izena);
     formData.append("abizena", abizena);
     formData.append("email", email);
-    formData.append("id", id);
+    formData.append("id", user.id);
 
     fetch("/users/new", {
         method: "POST",
