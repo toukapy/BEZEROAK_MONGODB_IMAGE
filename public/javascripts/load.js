@@ -55,14 +55,14 @@ let insertUser = (user) => {
 
   // Create a new row and set its innerHTML based on the user data
   var newRow = tableBody.insertRow();
-  newRow.setAttribute("id", user._id);
+  newRow.setAttribute("id", user.id);
   newRow.innerHTML = `
-                <th scope="row">${user._id}</th>
+                <th scope="row">${user.id}</th>
                 <td>${user.izena}</td>
                 <td>${user.abizena}</td>
                 <td>${user.email}</td>
                 <td><a href="https://test.toukapy-ws.live/uploads/${user.avatar}">Image</a></td>
-                <td><a onclick="deleteUser('${user._id}')">[x]</a> <a onclick="editUser('${user._id}')">[e]</a>  </td>
+                <td><a onclick="deleteUser('${user.id}')">[x]</a> <a onclick="editUser('${user.id}')">[e]</a>  </td>
             `;
 };
 
@@ -86,29 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("formularioa").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const avatarInput = document.getElementById("avatar");
+    const formData = new FormData(this);
 
-
-    const izena = e.target.izena.value;
-    const abizena = e.target.abizena.value;
-    const email = e.target.email.value;
-
-    let user = {
-        izena: izena,
-        abizena: abizena,
-        _id: Date.now(),
-        email: email,
-        avatar: avatarInput.files[0]
-    }
-
-    //insertUser(user);
-
-    const formData = new FormData();
-    formData.append("avatar", avatarInput.files[0]);
-    formData.append("izena", izena);
-    formData.append("abizena", abizena);
-    formData.append("email", email);
-    formData.append("id", user._id);
 
     fetch("/users/new", {
         method: "POST",
@@ -118,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log(data); // handle the response data or action
         insertUser(data);
+
       })
       .catch((error) => {
         console.error("Error:", error);
