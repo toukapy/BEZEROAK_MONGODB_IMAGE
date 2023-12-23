@@ -68,7 +68,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
     userNew['avatar'] = req.file.filename;
 
   }else{
-    userNew['avatar'] = 'default.png';
+    userNew['avatar'] = 'no-image.png';
   }
 
 
