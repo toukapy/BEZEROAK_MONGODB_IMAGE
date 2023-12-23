@@ -60,7 +60,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
   let userNew = {
     izena: req.body.izena,
     abizena: req.body.abizena,
-    _id: Date.now(),
+    //_id: Date.now(),
     email: req.body.email
   }
 
@@ -71,11 +71,12 @@ router.post("/new", upload.single('avatar'), (req, res) => {
     userNew['avatar'] = 'default.png';
   }
 
-  users.push(userNew);
+
   db.bezeroak.insert(userNew, function (err, user){
     if (err){
       res.status(500).json("");
     }else{
+      users.push(userNew);
       res.json(user);
     }
   });
@@ -84,13 +85,13 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-  users = users.filter(user => user._id !== req.params.id);
+  users = users.filter(user => user._id != req.params.id);
   db.bezeroak.remove({_id: mongojs.ObjectId(req.params.id)}, function (err, user){
     if(err){
       console.log(err)
 
     }else{
-      console.log(req.params._id)
+      console.log(req.params.id)
       res.json(user);
     }
   })
