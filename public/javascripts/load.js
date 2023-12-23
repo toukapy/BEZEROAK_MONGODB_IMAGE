@@ -85,24 +85,24 @@ let deleteUser = (id) => {
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("formularioa").addEventListener("submit", (e) => {
     e.preventDefault();
-    
-    let user = {
-        izena: e.target.izena.value,
-        abizena: e.target.abizena.value,
-        id: Date.now(),
-        email: e.target.email.value,
-        image: e.target.avatar.value
-    }
+
+    const avatarInput = document.getElementById("avatar");
+
+    const izena = "John";
+    const abizena = "Doe";
+    const email = "john.doe@example.com";
+
+    const formData = new FormData();
+    formData.append("avatar", avatarInput.files[0]);
+    formData.append("izena", izena);
+    formData.append("abizena", abizena);
+    formData.append("email", email);
 
     insertUser(user);
 
     fetch("/users/new", {
-      method: "POST",
-      headers: {
-          'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-          'Content-Type': 'multipart/form-data'
-      },
-      body: JSON.stringify(user),
+        method: "POST",
+        body: formData,
     })
       .then((response) => response.json())
       .then((data) => {

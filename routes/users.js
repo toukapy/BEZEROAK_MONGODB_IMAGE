@@ -57,21 +57,25 @@ router.get('/list', function(req, res, next) {
 
 
 router.post("/new", upload.single('avatar'), (req, res) => {
-  const { izena, abizena, email } = req.body;
-  const avatarPath = req.file ? `/uploads/${req.file.filename}` : null;
+  try {
+    const { izena, abizena, email } = req.body;
+    const avatarBuffer = req.file ? req.file.buffer : null;
 
-  const newUser = { izena, abizena, email, avatarPath };
+    const newUser = { izena, abizena, email, avatar: avatarBuffer };
 
-  users.push(newUser);
-
-  db.bezeroak2.insert(newUser, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(user);
-      res.json(user);
-    }
-  });
+    db.bezeroak.insert(newUser, function (err, user) {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+      } else {
+        console.log(user);
+        res.json(user);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 router.delete("/delete/:id", (req, res) => {
