@@ -62,7 +62,7 @@ router.post("/new", upload.single('avatar'), (req, res) => {
 
   const newUser = { izena, abizena, email, avatarPath };
 
-  users.push(user);
+  users.push(newUser);
 
   db.bezeroak.insert(newUser, function (err, user) {
     if (err) {
