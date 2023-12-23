@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let user = {
         izena: izena,
         abizena: abizena,
-        _id: Date.now(),
+        id: Date.now(),
         email: email,
         avatar: avatarInput.files[0]
     }
