@@ -12,14 +12,16 @@ let updateUser = (id) => {
     formData.append("email", email);
     formData.append("avatar", row.children[1].children[0].files[0]);
 
-    row.innerHTML = `
+    // Create a new img element
+    let img = document.createElement("img");
 
-    <th scope="row">${id}</th>
-    <td><img id="avat" src="" width="50" height="50"/></td>
-    <td>${izena}</td>
-    <td>${abizena}</td>
-    <td>${email}</td>
-    <td> <a onclick="deleteUser('${id}')">[x]</a> <a onclick="editUser('${id}')">[e]</a>  </td>
+    row.innerHTML = `
+        <th scope="row">${id}</th>
+        <td></td>
+        <td>${izena}</td>
+        <td>${abizena}</td>
+        <td>${email}</td>
+        <td><a onclick="deleteUser('${id}')">[x]</a> <a onclick="editUser('${id}')">[e]</a></td>
     `;
 
     fetch(`/users/update/${id}`, {
@@ -30,9 +32,13 @@ let updateUser = (id) => {
     .then(data => {
         console.log(data);
         console.log("Avatar: ", data.avatar);
-        let img = document.getElementById("avat");
+        // Set the attributes of the dynamically created img element
         img.src = data.avatar;
-        img.removeAttribute("id");
+        img.width = 50;
+        img.height = 50;
+
+        // Append the img element to the td element in the updated HTML
+        row.children[1].appendChild(img);
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -47,7 +53,7 @@ let editUser = (id) => {
     let email = row.children[4].innerHTML;
     row.innerHTML = `
     <th scope="row">${id}</th>
-    <td><input type="file" id="avatar" ></td>
+    <td><input type="file" id="avatar2" ></td>
     <td><input type="text" id="izena" value="${izena}"></td>
     <td><input type="text" id="abizena" value="${abizena}"></td>
     <td><input type="text" id="email" value="${email}"></td>
