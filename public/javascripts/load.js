@@ -10,7 +10,7 @@ let updateUser = (id) => {
     formData.append("abizena", abizena);
     formData.append("_id", id);
     formData.append("email", email);
-    formData.append("avatar", row.children[1].children[0].files[0]);
+    formData.append("avatar", row.children[4].children[0].files[0]);
 
     row.innerHTML = `
     <th scope="row">${id}</th>
@@ -47,6 +47,7 @@ let editUser = (id) => {
     <td><input type="text" id="izena" value="${izena}"></td>
     <td><input type="text" id="abizena" value="${abizena}"></td>
     <td><input type="text" id="email" value="${email}"></td>
+    <td><input type="file" id="avatar2" ></td>
     <td> <input type="button" onclick="updateUser('${id}')" value="Save"> </td>
     `;
 }
