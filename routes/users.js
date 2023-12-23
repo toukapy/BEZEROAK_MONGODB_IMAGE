@@ -100,7 +100,7 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.put("/update/:id",upload.single('avatar'), (req, res) => {
-  let user = users.find(user => user._id === req.params.id);
+  let user = users.find(user => user._id == req.params.id);
   user.izena = req.body.izena;
   user.abizena = req.body.abizena;
   user.email = req.body.email;
